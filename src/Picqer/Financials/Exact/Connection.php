@@ -153,7 +153,7 @@ class Connection
     /**
      * @var int
      */
-    public $rateLimitMargin = 0;
+    private $rateLimitSafetyMargin = 0;
 
     /**
      * @return Client
@@ -975,5 +975,18 @@ class Connection
             (new SystemUser($this))->url(),
             (new Me($this))->url(),
         ], true);
+    }
+
+    /**
+     * Set the margin that should be taken into account when determining if the minutely rate limit has been hit.
+     * This is useful when multiple applications are accessing the same Exact company via the REST API.
+     * If both applications (think) they have 1 remaining call to make, the last one to make the call will fail.
+     * The safety margin should be set to the total number of processes that can run concurrently minus one.
+     *
+     * @param int $rateLimitSafetyMargin
+     */
+    public function setRateLimitSafetyMargin(int $rateLimitSafetyMargin)
+    {
+        $this->rateLimitSafetyMargin = $rateLimitSafetyMargin;
     }
 }
