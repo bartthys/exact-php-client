@@ -950,7 +950,7 @@ class Connection
 
         $minutelyReset = $this->getMinutelyLimitReset();
 
-        if (($this->getMinutelyLimitRemaining() - $this->rateLimitMargin) <= 0 && $minutelyReset) {
+        if (($this->getMinutelyLimitRemaining() - $this->rateLimitSafetyMargin) <= 0 && $minutelyReset) {
             // add a second for rounding differences
             $resetsInSeconds = (($minutelyReset / 1000) - time()) + 1;
 
