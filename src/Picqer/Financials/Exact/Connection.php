@@ -153,7 +153,17 @@ class Connection
     /**
      * @var int
      */
-    private $rateLimitSafetyMargin = 0;
+    private $minutelyRateLimitSafetyMargin = 0;
+
+    /**
+     * @var bool
+     */
+    private $abortOnDailyRateLimitHit = false;
+
+    /**
+     * @var int
+     */
+    private $dailyRateLimitSafetyMargin = 0;
 
     /**
      * @return Client
@@ -280,6 +290,7 @@ class Connection
      */
     public function get($url, array $params = [], array $headers = [])
     {
+        $this->abortIfDailyRateLimitHit();
         $this->waitIfMinutelyRateLimitHit();
         $url = $this->formatUrl($url, $this->requiresDivisionInRequestUrl($url), $url === $this->nextUrl);
 
@@ -303,6 +314,7 @@ class Connection
      */
     public function post($url, $body)
     {
+        $this->abortIfDailyRateLimitHit();
         $this->waitIfMinutelyRateLimitHit();
         $url = $this->formatUrl($url);
 
@@ -370,6 +382,7 @@ class Connection
      */
     public function put($url, $body)
     {
+        $this->abortIfDailyRateLimitHit();
         $this->waitIfMinutelyRateLimitHit();
         $url = $this->formatUrl($url);
 
@@ -392,6 +405,7 @@ class Connection
      */
     public function delete($url)
     {
+        $this->abortIfDailyRateLimitHit();
         $this->waitIfMinutelyRateLimitHit();
         $url = $this->formatUrl($url);
 
@@ -411,11 +425,11 @@ class Connection
     public function getAuthUrl()
     {
         return $this->baseUrl . $this->authUrl . '?' . http_build_query([
-            'client_id'     => $this->exactClientId,
-            'redirect_uri'  => $this->redirectUrl,
-            'response_type' => 'code',
-            'state'         => $this->state,
-        ]);
+                'client_id'     => $this->exactClientId,
+                'redirect_uri'  => $this->redirectUrl,
+                'response_type' => 'code',
+                'state'         => $this->state,
+            ]);
     }
 
     /**
@@ -950,7 +964,7 @@ class Connection
 
         $minutelyReset = $this->getMinutelyLimitReset();
 
-        if (($this->getMinutelyLimitRemaining() - $this->rateLimitSafetyMargin) <= 0 && $minutelyReset) {
+        if (($this->getMinutelyLimitRemaining() - $this->minutelyRateLimitSafetyMargin) <= 0 && $minutelyReset) {
             // add a second for rounding differences
             $resetsInSeconds = (($minutelyReset / 1000) - time()) + 1;
 
@@ -961,6 +975,19 @@ class Connection
             }
 
             sleep($resetsInSeconds);
+        }
+    }
+
+    protected function abortIfDailyRateLimitHit()
+    {
+        if (! $this->abortOnDailyRateLimitHit) {
+            return;
+        }
+
+        if (($this->getDailyLimitRemaining() - $this->dailyRateLimitSafetyMargin) <= 0) {
+            throw new ApiException(
+                'Daily limit reached (remaining = ' . $this->getDailyLimitRemaining() . ', safety margin = ' . $this->dailyRateLimitSafetyMargin . ')'
+            );
         }
     }
 
@@ -983,10 +1010,30 @@ class Connection
      * If both applications (think) they have 1 remaining call to make, the last one to make the call will fail.
      * The safety margin should be set to the total number of processes that can run concurrently minus one.
      *
-     * @param int $rateLimitSafetyMargin
+     * @param int $minutelyRateLimitSafetyMargin
      */
-    public function setRateLimitSafetyMargin(int $rateLimitSafetyMargin)
+    public function setMinutelyRateLimitSafetyMargin(int $minutelyRateLimitSafetyMargin)
     {
-        $this->rateLimitSafetyMargin = $rateLimitSafetyMargin;
+        $this->minutelyRateLimitSafetyMargin = $minutelyRateLimitSafetyMargin;
     }
+
+    public function setAbortOnDailyRateLimitHit(bool $abortOnDailyRateLimitHit)
+    {
+        $this->abortOnDailyRateLimitHit = $abortOnDailyRateLimitHit;
+    }
+
+    /**
+     * Set the margin that should be taken into account when determining if the daily rate limit has been hit.
+     * If the limit is hit, an Exception is thrown *before* a new request is sent (instead of after a request has been
+     * sent). This makes the connection more reliable since getting an exception after sending a request can make it
+     * difficult to determine if the request was processed successfully.
+     *
+     * @param int $dailyRateLimitSafetyMargin
+     */
+    public function setDailyRateLimitSafetyMargin(int $dailyRateLimitSafetyMargin): void
+    {
+        $this->dailyRateLimitSafetyMargin = $dailyRateLimitSafetyMargin;
+    }
+
+
 }
