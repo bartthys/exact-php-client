@@ -8,7 +8,7 @@ namespace Picqer\Financials\Exact;
  * @see https://start.exactonline.nl/docs/HlpRestAPIResourcesDetails.aspx?name=SystemUsers
  *
  * @property string $UserID Primary key
- * @property int $AuthenticationType Authentication Type: 2=Forms, 8=Totp, 16=Auth0FederatedSSO, 32=Auth0Login, 64=B2CFederatedLogin, 128=B2CLogin. It is a bitwise enumerator, e.g. Forms + Totp = 10
+ * @property int $AuthenticationType Authentication Type: 2=Forms, 8=Totp, 64=B2CFederatedLogin, 128=B2CLogin. It is a bitwise enumerator, e.g. Forms + Totp = 10
  * @property string $BirthDate Birth date
  * @property string $Created Creation date
  * @property string $Creator User ID of the creator
@@ -40,7 +40,8 @@ namespace Picqer\Financials\Exact;
  * @property string $StartDate Startdate after which the login is allowed. If the start date is NULL the login is allowed as well
  * @property string $Title Title
  * @property string $UserDivisionList User Division List - CSV format
- * @property string $UserName Login name of the user
+ * @property string $UserLanguage User's regional language option setting in User settings
+ * @property string $UserName Login name of the user. If the user logs in with One Exact Identity, the login name is in the email address field
  * @property string $UserTypeCode User type code
  */
 class SystemUser extends Model
@@ -84,6 +85,7 @@ class SystemUser extends Model
         'StartDate',
         'Title',
         'UserDivisionList',
+        'UserLanguage',
         'UserName',
         'UserTypeCode',
     ];

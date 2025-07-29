@@ -22,17 +22,16 @@ namespace Picqer\Financials\Exact;
  * @property string $Employee ID of employee
  * @property string $EmployeeFullName Name of employee
  * @property int $EmployeeHID Numeric ID of the employee
- * @property string $Employment Employement ID
- * @property int $EmploymentHID Numeric ID of the employment
- * @property string $EndDate Organization end date
+ * @property string $Employment Employment ID
+ * @property int $EmploymentNumber Employment number
+ * @property string $EndDate Organization end dateNote : This property only supported for successor
  * @property string $JobTitle ID of job title
  * @property string $JobTitleCode Job title code
  * @property string $JobTitleDescription Job title description
  * @property string $Modified Last modified date
  * @property string $Modifier User ID of modifier
  * @property string $ModifierFullName Name of modifier
- * @property string $Notes Explanation or extra information can be stored in the notes
- * @property string $StartDate Organization start date
+ * @property string $StartDate Organization start dateNote : This property only supported for successor
  */
 class EmploymentOrganization extends Model
 {
@@ -55,7 +54,7 @@ class EmploymentOrganization extends Model
         'EmployeeFullName',
         'EmployeeHID',
         'Employment',
-        'EmploymentHID',
+        'EmploymentNumber',
         'EndDate',
         'JobTitle',
         'JobTitleCode',
@@ -63,7 +62,6 @@ class EmploymentOrganization extends Model
         'Modified',
         'Modifier',
         'ModifierFullName',
-        'Notes',
         'StartDate',
     ];
 

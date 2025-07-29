@@ -13,20 +13,22 @@ namespace Picqer\Financials\Exact;
  * @property string $AccountContact Contact person of Account
  * @property string $AccountName Name of Account
  * @property bool $AllowAdditionalInvoicing Indicates if additional invoice is allowed for project
+ * @property bool $AllowMemberEntryOnly Allow only member to create time or cost entry
  * @property bool $BlockEntry Block time and cost entries
+ * @property bool $BlockInvoicing Block invoicing
  * @property bool $BlockPlanning Block planning and reservations
  * @property bool $BlockPurchasing Block purchasing
  * @property bool $BlockRebilling Block rebilling
  * @property float $BudgetedAmount Budgeted amount of sales in the default currency of the company
  * @property float $BudgetedCosts Budgeted amount of costs in the default currency of the company
- * @property BudgetedHoursPerHourType[] $BudgetedHoursPerHourType Collection of budgeted hours
+ * @property ProjectHourBudget[] $BudgetedHoursPerHourType Collection of budgeted hours
  * @property float $BudgetedRevenue Budgeted amount of revenue in the default currency of the company
  * @property int $BudgetOverrunHours BudgetOverrunHours: 10-Allowed, 20-Not Allowed
  * @property int $BudgetType Budget type
  * @property string $BudgetTypeDescription Budget type description
  * @property string $Classification Used only for PSA to link a project classification to the project
  * @property string $ClassificationDescription Description of Classification
- * @property string $Code Code
+ * @property string $Code Code Note : Code is not mandatory in PSA packages.If no code is provided, project auto number will be used, but this can only be applied to PSA packages.
  * @property float $CostsAmountFC Used only for PSA to store the budgetted costs of a project (except for project type Campaign and Non-billable). Positive quantities only
  * @property string $Created Creation date
  * @property string $Creator User ID of creator
@@ -45,7 +47,9 @@ namespace Picqer\Financials\Exact;
  * @property string $InternalNotes Internal notes not to be printed in invoice
  * @property string $InvoiceAddress Invoice address
  * @property bool $InvoiceAsQuoted Indicates whether the project is invoice as quoted
+ * @property string $InvoiceDescription Description for generate project invoice
  * @property InvoiceTerm[] $InvoiceTerms Collection of invoice terms
+ * @property int $IsWBSRequiredForEntry Indicates whether the project WBS is required for time and cost entry E.g: 0 = Based on company setting, 1 = Yes, 2 = No
  * @property string $Manager Responsible person for this project
  * @property string $ManagerFullname Name of Manager
  * @property float $MarkupPercentage Purchase markup percentage
@@ -81,7 +85,9 @@ class Project extends Model
         'AccountContact',
         'AccountName',
         'AllowAdditionalInvoicing',
+        'AllowMemberEntryOnly',
         'BlockEntry',
+        'BlockInvoicing',
         'BlockPlanning',
         'BlockPurchasing',
         'BlockRebilling',
@@ -113,7 +119,9 @@ class Project extends Model
         'InternalNotes',
         'InvoiceAddress',
         'InvoiceAsQuoted',
+        'InvoiceDescription',
         'InvoiceTerms',
+        'IsWBSRequiredForEntry',
         'Manager',
         'ManagerFullname',
         'MarkupPercentage',

@@ -17,7 +17,7 @@ namespace Picqer\Financials\Exact;
  * @property string $EmployeeFullName Name of employee
  * @property int $EmployeeHID Employee number
  * @property string $Employment Employment
- * @property int $EmploymentHID Employment number
+ * @property int $EmploymentNumber Employment number
  * @property string $EndDate End date of employment agencies
  * @property string $InfluenceInsuranceObligation Influence insurance obligation
  * @property string $InfluenceInsuranceObligationDescription Influence insurance obligation description
@@ -46,7 +46,7 @@ class EmploymentTaxAuthoritiesGeneral extends Model
         'EmployeeFullName',
         'EmployeeHID',
         'Employment',
-        'EmploymentHID',
+        'EmploymentNumber',
         'EndDate',
         'InfluenceInsuranceObligation',
         'InfluenceInsuranceObligationDescription',

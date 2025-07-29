@@ -9,7 +9,8 @@ namespace Picqer\Financials\Exact;
  *
  * @property string $QuotationID Identifier of the quotation.
  * @property string $AcceptEmailLayout If you enter for this field, your customer receives an email with the quotation after approval of the quotation.
- * @property int $Action 0 = No action (Default), 1 = create sales order, 2 = create sales invoice, 3 = create project, 4 = add to existing project, 5 = create subscription
+ * @property string $AcceptOpportunityStage The stage of the opportunity after approval of the quotation.
+ * @property int $Action 0 = No action (Default), 1 = create sales order, 2 = create sales invoice, 3 = create project, 4 = add to existing project, 5 = create subscription. For CRM standalone: If the value is not provided, the default value will set to '2 - create sales invoice'. If the value is provided, the value must be '2 - create sales invoice'. Otherwise, the error message will be thrown.
  * @property bool $AllowProvideYourRef Allow customers to enter their purchase order number.
  * @property bool $CreateItemPriceAgreement Create a project item price agreement. Only needed when Action = 3 or Action = 4. Default = True.
  * @property bool $CreateProjectWBS Create a project work breakdown structure. Only needed when ProjectBudgetType = 2.
@@ -18,7 +19,7 @@ namespace Picqer\Financials\Exact;
  * @property string $EmailLayout Based on this layout the email text is produced.
  * @property string $ErrorMessage Contains the error message if an error occurred during the creation of the Email.
  * @property string $ExtraText Extra text that can be added to the printed document and email.
- * @property string $InvoiceJournal The journal in which the sales invoice will be booked. Mandatory for Action = 2.
+ * @property string $InvoiceJournal The journal in which the sales invoice will be booked. Mandatory for Action = 2. For CRM standalone: If the value is not provided, the default value will set to 'sales journal'. If the value is provided, the value must be 'sales journal'. Otherwise, the error message will be thrown.
  * @property int $ProjectBudgetType The budget type of the project that will be created. 0 = None (Default), 1 = Hours per hour type, 2 = Work breakdown structure (WBS).
  * @property string $ProjectClassification The ID of the project classification.
  * @property string $ProjectCode The code of the project that will be created. Mandatory for Action = 3.
@@ -32,6 +33,7 @@ namespace Picqer\Financials\Exact;
  * @property string $ProjectWBSPartOf The ID of the WBS deliverable part of. Only needed when Action = 4 and CreateProjectWBS = True.
  * @property string $QuotationDate Date of the quotation printed.
  * @property string $RejectEmailLayout If you enter for this field, your customer receives an email informing them of the rejected quotation.
+ * @property string $RejectOpportunityStage The stage of the opportunity after reject the quotation.
  * @property string $SenderEmailAddress Email address from which the email will be sent. If not specified, the company email address will be used.
  * @property string $Subject Subject of the email. If LayoutEmailSubject featureset is enabled, subject in email text layout will be used.
  * @property string $SubscriptionDate The start date of the subscription. Mandatory for Action = 5.
@@ -51,6 +53,7 @@ class EmailWithSignOffQuotation extends Model
     protected $fillable = [
         'QuotationID',
         'AcceptEmailLayout',
+        'AcceptOpportunityStage',
         'Action',
         'AllowProvideYourRef',
         'CreateItemPriceAgreement',
@@ -74,6 +77,7 @@ class EmailWithSignOffQuotation extends Model
         'ProjectWBSPartOf',
         'QuotationDate',
         'RejectEmailLayout',
+        'RejectOpportunityStage',
         'SenderEmailAddress',
         'Subject',
         'SubscriptionDate',

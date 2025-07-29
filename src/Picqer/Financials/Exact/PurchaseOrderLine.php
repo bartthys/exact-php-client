@@ -53,6 +53,8 @@ namespace Picqer\Financials\Exact;
  * @property string $SalesOrderLine Sales order line of the sales order that Is linked to a back to back sales order in purchase order. Show NULL if more than one sales order is linked to the purchase order line.
  * @property int $SalesOrderLineNumber Number of the sales order line. Show NULL if more than one sales order is linked to the purchase order line.
  * @property int $SalesOrderNumber Number of the sales order. Show NULL if more than one sales order is linked to the purchase order line.
+ * @property ShopOrderMaterialPlan[] $ShopOrderMaterialPlans Collection of Shop order Material plans
+ * @property ShopOrderRoutingStepPlan[] $ShopOrderRoutingStepPlans Collection of Shop order Routing step plans
  * @property string $SupplierItemCode Code the supplier uses for this item
  * @property int $SupplierItemCopyRemarks Indicate if the notes content should be copied from SupplierItem's remarks. The default follows the CopyRemarks value from SupplierItem. Values: 0 = Do not copy remark, 1 = Copy remark
  * @property string $Unit Code of item unit
@@ -115,6 +117,8 @@ class PurchaseOrderLine extends Model
         'SalesOrderLine',
         'SalesOrderLineNumber',
         'SalesOrderNumber',
+        'ShopOrderMaterialPlans',
+        'ShopOrderRoutingStepPlans',
         'SupplierItemCode',
         'SupplierItemCopyRemarks',
         'Unit',

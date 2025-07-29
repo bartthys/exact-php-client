@@ -1,0 +1,36 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^PHPDoc tag @property for property Picqer\\Financials\\Exact\\BulkGoodsDelivery\:\:\$GoodsDeliveryLines contains unknown class Picqer\\Financials\\Exact\\goodsdeliverylines\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Picqer/Financials/Exact/BulkGoodsDelivery.php
+
+		-
+			message: '#^PHPDoc tag @property for property Picqer\\Financials\\Exact\\BulkGoodsDeliveryLine\:\:\$BatchNumbers contains unknown class Picqer\\Financials\\Exact\\stockbatchnumbers\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Picqer/Financials/Exact/BulkGoodsDeliveryLine.php
+
+		-
+			message: '#^PHPDoc tag @property for property Picqer\\Financials\\Exact\\BulkGoodsDeliveryLine\:\:\$SerialNumbers contains unknown class Picqer\\Financials\\Exact\\stockserialnumbers\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Picqer/Financials/Exact/BulkGoodsDeliveryLine.php
+		-
+			message: '#^PHPDoc tag @property for property Picqer\\Financials\\Exact\\ReasonForLogistic\:\:\$Types contains unknown class Picqer\\Financials\\Exact\\Type\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Picqer/Financials/Exact/ReasonForLogistic.php
+
+		-
+			message: '#^PHPDoc tag @property for property Picqer\\Financials\\Exact\\User\:\:\$UserRoles contains unknown class Picqer\\Financials\\Exact\\UserRoles\.$#'
+			identifier: class.notFound
+			count: 1
+			path: src/Picqer/Financials/Exact/User.php
+
+		-
+			message: '#^Trait Picqer\\Financials\\Exact\\Webhook\\Authenticatable is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Picqer/Financials/Exact/Webhook/Authenticatable.php

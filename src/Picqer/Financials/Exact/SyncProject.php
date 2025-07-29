@@ -13,7 +13,9 @@ namespace Picqer\Financials\Exact;
  * @property string $AccountContact Contact person of Account
  * @property string $AccountName Name of Account
  * @property bool $AllowAdditionalInvoicing Indicates if additional invoice is allowed for project
+ * @property bool $AllowMemberEntryOnly Allow only member to create time or cost entry
  * @property bool $BlockEntry Block time and cost entries
+ * @property bool $BlockInvoicing Block invoicing
  * @property bool $BlockPlanning Block planning and reservations
  * @property bool $BlockPurchasing Block purchasing
  * @property bool $BlockRebilling Block rebilling
@@ -35,6 +37,7 @@ namespace Picqer\Financials\Exact;
  * @property string $Description Description of the project
  * @property int $Division Division code
  * @property string $DivisionName Name of Division
+ * @property bool $EnableWorkInProgress Work in progress: To be invoiced
  * @property string $EndDate End date of the project. In combination with the start date the status is determined
  * @property string $FixedPriceItem Item used for fixed price invoicing. To be defined per project. If empty the functionality relies on the setting
  * @property string $FixedPriceItemDescription Description of FixedPriceItem
@@ -45,6 +48,8 @@ namespace Picqer\Financials\Exact;
  * @property string $InternalNotes Internal notes not to be printed in invoice
  * @property string $InvoiceAddress Invoice address
  * @property bool $InvoiceAsQuoted Indicates whether the project is invoice as quoted
+ * @property string $InvoiceDescription Description for generate project invoice
+ * @property int $IsWBSRequiredForEntry Indicates whether the project WBS is required for time and cost entry E.g: 0 = Based on company setting, 1 = Yes, 2 = No
  * @property string $Manager Responsible person for this project
  * @property string $ManagerFullname Name of Manager
  * @property float $MarkupPercentage Purchase markup percentage
@@ -78,7 +83,9 @@ class SyncProject extends Model
         'AccountContact',
         'AccountName',
         'AllowAdditionalInvoicing',
+        'AllowMemberEntryOnly',
         'BlockEntry',
+        'BlockInvoicing',
         'BlockPlanning',
         'BlockPurchasing',
         'BlockRebilling',
@@ -100,6 +107,7 @@ class SyncProject extends Model
         'Description',
         'Division',
         'DivisionName',
+        'EnableWorkInProgress',
         'EndDate',
         'FixedPriceItem',
         'FixedPriceItemDescription',
@@ -110,6 +118,8 @@ class SyncProject extends Model
         'InternalNotes',
         'InvoiceAddress',
         'InvoiceAsQuoted',
+        'InvoiceDescription',
+        'IsWBSRequiredForEntry',
         'Manager',
         'ManagerFullname',
         'MarkupPercentage',

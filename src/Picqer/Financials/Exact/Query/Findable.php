@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Picqer\Financials\Exact\Query;
 
 use Generator;
@@ -17,12 +19,9 @@ trait Findable
     /**
      * @return string
      */
-    abstract public function url();
+    abstract public function url(): string;
 
-    /**
-     * @return string
-     */
-    abstract public function primaryKey();
+    abstract public function primaryKey(): string;
 
     public function find($id)
     {
@@ -56,7 +55,7 @@ trait Findable
     /**
      * Return the value of the primary key.
      *
-     * @param string $code the value to search for
+     * @param string|int $code the value to search for
      * @param string $key  the key being searched (defaults to 'Code')
      *
      * @return string|void (guid)
@@ -65,7 +64,7 @@ trait Findable
     {
         if ($this->isFillable($key)) {
             $format = ($this->url() == 'crm/Accounts' && $key === 'Code') ? '%18s' : '%s';
-            if (preg_match('/^[\w]{8}-([\w]{4}-){3}[\w]{12}$/', $code)) {
+            if (is_string($code) && preg_match('/^[\w]{8}-([\w]{4}-){3}[\w]{12}$/', $code)) {
                 $format = "guid'$format'";
             } elseif (is_string($code)) {
                 $format = "'$format'";
@@ -144,9 +143,8 @@ trait Findable
         }
 
         $results = $this->filter($filter, $expand, $select, $query_options, $headers);
-        $result = is_array($results) && count($results) > 0 ? $results[0] : null;
 
-        return $result;
+        return count($results) > 0 ? $results[0] : null;
     }
 
     public function getResultSet(array $params = [])

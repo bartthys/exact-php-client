@@ -9,6 +9,7 @@ namespace Picqer\Financials\Exact;
  *
  * @property int $Timestamp Timestamp
  * @property int $Backflush Indicates if this is a backflush step
+ * @property string $Barcode Barcode of the item (numeric string)
  * @property int $CalculatorType Calculator type
  * @property string $Created Creation date
  * @property string $Creator User ID of creator
@@ -20,6 +21,7 @@ namespace Picqer\Financials\Exact;
  * @property string $Item Reference to Items table
  * @property string $ItemCode Item Code (material)
  * @property string $ItemDescription Description of Item (material)
+ * @property string $ItemMaterial Reference to BillOfMaterialMaterials
  * @property string $ItemPictureUrl URL of the material item's picture
  * @property int $LineNumber Line number
  * @property string $Modified Last modified date
@@ -31,6 +33,7 @@ namespace Picqer\Financials\Exact;
  * @property float $PlannedPriceFC Planned price of the material
  * @property float $PlannedQuantity Intended total planned quantity of the material including waste
  * @property float $PlannedQuantityFactor Intended quantity of the material per unit excluding waste
+ * @property string $RoutingStepID ID of the routing step.
  * @property string $ShopOrder Reference to ShopOrders table
  * @property int $Status Line status
  * @property string $StatusDescription Description of Status
@@ -48,6 +51,7 @@ class SyncShopOrderMaterialPlan extends Model
     protected $fillable = [
         'Timestamp',
         'Backflush',
+        'Barcode',
         'CalculatorType',
         'Created',
         'Creator',
@@ -59,6 +63,7 @@ class SyncShopOrderMaterialPlan extends Model
         'Item',
         'ItemCode',
         'ItemDescription',
+        'ItemMaterial',
         'ItemPictureUrl',
         'LineNumber',
         'Modified',
@@ -70,6 +75,7 @@ class SyncShopOrderMaterialPlan extends Model
         'PlannedPriceFC',
         'PlannedQuantity',
         'PlannedQuantityFactor',
+        'RoutingStepID',
         'ShopOrder',
         'Status',
         'StatusDescription',

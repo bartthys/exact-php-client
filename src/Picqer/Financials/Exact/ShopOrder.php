@@ -26,6 +26,7 @@ namespace Picqer\Financials\Exact;
  * @property int $IsReleased Indicator that the Shop order has been released to production
  * @property int $IsSerial Does the material plan's item use serial numbers
  * @property string $Item Reference to the item created by this shoporder
+ * @property string $ItemBarcode Barcode of the item created by this shop order
  * @property string $ItemCode Code of the item created by this shop order
  * @property string $ItemDescription Description of the item created by this shop order
  * @property string $ItemPictureUrl URL of the picture linked to the item created by this shop order
@@ -44,7 +45,7 @@ namespace Picqer\Financials\Exact;
  * @property string $ProjectDescription Description of Project
  * @property float $ReadyToShipQuantity Quantity ready to ship
  * @property int $SalesOrderLineCount Number of sales orders linked to this shop order
- * @property SalesOrderline[] $SalesOrderLines Collection of Sales order lines
+ * @property SalesOrderLine[] $SalesOrderLines Collection of Sales order lines
  * @property string $SelectionCode ID of selection code. Only supported by the Plus, Professional and Premium editions for Wholesale & Distribution and Manufacturing
  * @property string $SelectionCodeCode Code of Selection code
  * @property string $SelectionCodeDescription Description of Selection code
@@ -55,6 +56,8 @@ namespace Picqer\Financials\Exact;
  * @property int $ShopOrderMaterialPlanBackflushCount Number of shop order material plans, which are backflushed, for this shop order
  * @property int $ShopOrderMaterialPlanCount Number of shop order material plans for this shop order
  * @property ShopOrderMaterialPlan[] $ShopOrderMaterialPlans Collection of Shop order Material plans
+ * @property int $ShopOrderMaterialPlansNonIssuedByproductsCount Count of non-issued shop order material plans related to byproducts
+ * @property int $ShopOrderMaterialPlansNonIssuedMaterialsCount Count of non-issued shop order material plans related to materials
  * @property int $ShopOrderNumber Unique number to indentify the shop order
  * @property string $ShopOrderNumberString Unique number to indentify the shop order (as a string to allow OData filtering, e.g. $filter=substringof('123',ShopOrderNumberString) eq true
  * @property string $ShopOrderParent Shop order parent
@@ -67,6 +70,8 @@ namespace Picqer\Financials\Exact;
  * @property string $Unit Unit of the item created by this shop order
  * @property string $UnitDescription Unit description of the unit of the item created by this shop order
  * @property string $Warehouse Reference to the Warehouse associated with the Shop order
+ * @property string $WarehouseCode Code of Warehouse
+ * @property string $WarehouseDescription Description of Warehouse
  * @property string $YourRef Your reference (of the customer)
  */
 class ShopOrder extends Model
@@ -94,6 +99,7 @@ class ShopOrder extends Model
         'IsReleased',
         'IsSerial',
         'Item',
+        'ItemBarcode',
         'ItemCode',
         'ItemDescription',
         'ItemPictureUrl',
@@ -123,6 +129,8 @@ class ShopOrder extends Model
         'ShopOrderMaterialPlanBackflushCount',
         'ShopOrderMaterialPlanCount',
         'ShopOrderMaterialPlans',
+        'ShopOrderMaterialPlansNonIssuedByproductsCount',
+        'ShopOrderMaterialPlansNonIssuedMaterialsCount',
         'ShopOrderNumber',
         'ShopOrderNumberString',
         'ShopOrderParent',
@@ -135,6 +143,8 @@ class ShopOrder extends Model
         'Unit',
         'UnitDescription',
         'Warehouse',
+        'WarehouseCode',
+        'WarehouseDescription',
         'YourRef',
     ];
 

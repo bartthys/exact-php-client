@@ -17,6 +17,8 @@ namespace Picqer\Financials\Exact;
  * @property string $CategoryDescription Description of Category
  * @property string $Contact ID of the related contact of this document
  * @property string $ContactFullName Contact full name
+ * @property string $ContractID The contract linked to the document
+ * @property string $ContractNumber Contract Number
  * @property string $Created Creation date
  * @property string $Creator User ID of creator
  * @property string $CreatorFullName Name of creator
@@ -46,9 +48,11 @@ namespace Picqer\Financials\Exact;
  * @property int $ProposedEntryStatus ProposedEntryStatus, 0 = Void, 5 = Rejected, 20 = Open, 50 = Processed
  * @property int $SalesInvoiceNumber 'Our reference' of the transaction that belongs to this document
  * @property int $SalesOrderNumber Number of the sales order
+ * @property int $ScanServiceStatus ScanServiceStatus
  * @property int $SendMethod Send method
  * @property int $ShopOrderNumber Number of the shop order
  * @property string $Subject Subject of this document
+ * @property string $TeamsMeetingId Teams meeting id
  * @property int $Type ID of the type of this document
  * @property string $TypeDescription Description of Type
  */
@@ -68,6 +72,8 @@ class Document extends Model
         'CategoryDescription',
         'Contact',
         'ContactFullName',
+        'ContractID',
+        'ContractNumber',
         'Created',
         'Creator',
         'CreatorFullName',
@@ -97,9 +103,11 @@ class Document extends Model
         'ProposedEntryStatus',
         'SalesInvoiceNumber',
         'SalesOrderNumber',
+        'ScanServiceStatus',
         'SendMethod',
         'ShopOrderNumber',
         'Subject',
+        'TeamsMeetingId',
         'Type',
         'TypeDescription',
     ];

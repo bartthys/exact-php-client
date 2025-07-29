@@ -8,7 +8,6 @@ namespace Picqer\Financials\Exact;
  * @see https://start.exactonline.nl/docs/HlpRestAPIResourcesDetails.aspx?name=ManufacturingBillOfMaterialMaterials
  *
  * @property string $ID Primary key
- * @property float $AverageCost Item average cost available when average cost method is used
  * @property int $Backflush Indicates if this is a backflush item
  * @property int $CalculatorType Calculator type
  * @property float $CostBatch Cost batch
@@ -26,11 +25,13 @@ namespace Picqer\Financials\Exact;
  * @property string $NetWeightUnit Net weight unit of measure
  * @property string $Notes Notes
  * @property string $PartItem Key of part item
+ * @property float $PartItemAverageCost Item average cost available when average cost method is used
  * @property string $PartItemCode Part item code
  * @property float $PartItemCostPriceStandard Item standard cost available when standard cost method is used
  * @property string $PartItemDescription Part item description
  * @property float $Quantity Quantity of the material that ends up in the produced item
  * @property float $QuantityBatch Quantity of the material needed to produce the batch including the waste
+ * @property string $RoutingStepID ID of the routing step
  * @property string $syscreated Creation date
  * @property string $syscreator User ID of creator
  * @property string $sysmodified Modified date
@@ -45,7 +46,6 @@ class BillOfMaterialMaterial extends Model
 
     protected $fillable = [
         'ID',
-        'AverageCost',
         'Backflush',
         'CalculatorType',
         'CostBatch',
@@ -63,11 +63,13 @@ class BillOfMaterialMaterial extends Model
         'NetWeightUnit',
         'Notes',
         'PartItem',
+        'PartItemAverageCost',
         'PartItemCode',
         'PartItemCostPriceStandard',
         'PartItemDescription',
         'Quantity',
         'QuantityBatch',
+        'RoutingStepID',
         'syscreated',
         'syscreator',
         'sysmodified',
